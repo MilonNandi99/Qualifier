@@ -1,0 +1,6 @@
+select Pass_Name, Flight_name
+from Flight_details f, Booking b, Booking_Details bd, Passengers P
+where f.Flight_id = b.Flight_id and b.Booking_id = bd.Booking_id 
+and bd.Pass_id = p.Pass_id
+and b.Booking_date = f.Flight_date
+order by Pass_Name desc;
