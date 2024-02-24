@@ -1,0 +1,95 @@
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Map.Entry;
+
+public class JewelleryInfo {
+	private Map<String,Double> jewelleryMap;
+
+	public Map<String, Double> getJewelleryMap() {
+		return jewelleryMap;
+	}
+
+	public void setJewelleryMap(Map<String, Double> jewelleryMap) {
+		this.jewelleryMap = jewelleryMap;
+	}
+	
+	public double findThePriceOfJewelleryItem(String jewelName)
+	{
+		//Fill the code
+		double price=0;
+	for(Map.Entry<String,Double> entry : jewelleryMap.entrySet()){
+	    if(entry.getKey().equalsIgnoreCase(jewelName))
+	    price= entry.getValue();
+	}
+	if(price!=0){
+	    return price;
+	}
+	return -1;
+	
+	}
+	
+	public List<String> findMostExpensiveJewelleryItem()
+	{
+		//Fill the code
+	List<String> res= new ArrayList<>();
+	double max=Collections.max(jewelleryMap.values());
+	for(Map.Entry<String,Double> entry : jewelleryMap.entrySet()){	 	  	 	      	     	      	 	   	 	
+	    if(entry.getValue()>=max)
+	   res.add(entry.getKey());
+	}
+	
+	
+	return res;
+		
+	}
+	
+	
+	public static void main(String args[]) {
+		JewelleryInfo jObj = new JewelleryInfo();
+
+		Scanner sc = new Scanner(System.in);
+
+		Map<String,Double> sMap = new HashMap<String,Double>();
+
+		System.out.println("Enter number of Jewellery item to be added");
+		int n = Integer.parseInt(sc.nextLine());
+
+		System.out.println("Enter the Jewellery item details (JewelleryItem: Price/kg)");
+		for(int i=0;i<n;i++) {
+			String s = sc.nextLine();
+			String[] strArr = s.split(":");
+			sMap.put(strArr[0], Double.parseDouble(strArr[1]));
+		}
+		jObj.setJewelleryMap(sMap);
+
+		System.out.println("Enter the Jewellery item name");
+		String jewelName= sc.nextLine();
+		double price=jObj.findThePriceOfJewelleryItem(jewelName);
+		if(price>0)
+		{	 	  	 	      	     	      	 	   	 	
+			System.out.println("The Price for "+jewelName+" is $."+price);
+		}else
+		{
+			System.out.println(jewelName+" is not available");
+		}
+
+
+		List<String> list=jObj.findMostExpensiveJewelleryItem();
+		if(list.size()>0)
+		{
+			System.out.println("The most expensive Jewellery item is");
+			for(int i=0;i<list.size();i++){
+				System.out.println(list.get(i));
+			}
+		}
+
+	}
+	
+}
+
