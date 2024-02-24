@@ -1,0 +1,5 @@
+select pe.customer_id, po.policy_name,date_add(pe.date_of_enrollment, interval no_of_years year) 
+as policy_end_date
+from policyEnrollment pe
+join policy po on pe.policy_id = po.policy_id
+order by pe.customer_id asc;
