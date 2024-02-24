@@ -1,0 +1,4 @@
+select concat('The ',Boat_name,' boat has the most seats available') as BOAT_SEAT_CAPACITY
+from boat_details 
+where seat_capacity = (select max(seat_capacity) from boat_details) 
+order BY BOAT_SEAT_CAPACITY desc;
