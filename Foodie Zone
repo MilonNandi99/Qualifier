@@ -1,0 +1,108 @@
+package Qualifier.Collection.FoodieZone;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class FoodOrderMain {
+	
+	private Map<String, Float> orderMap;
+
+	
+
+	public Map<String, Float> getOrderMap() {
+		return orderMap;
+	}
+
+	public void setOrderMap(Map<String, Float> orderMap) {
+		this.orderMap = orderMap;
+	}
+
+	public float findRatingOfGivenOrderId(String orderId)
+	{
+	    // Fill the code here
+		float s=-1;
+		Map<String,Float> a=getOrderMap();
+		for(Map.Entry<String,Float> entry:a.entrySet())
+		{
+			if((entry.getKey()).equals(orderId))
+					{
+						s=entry.getValue();
+						
+						//System.out.println(s);
+					}
+		}
+		
+		return s;
+
+	   // return 0;
+	}
+
+	public List<String> findOrderIdsWithLowRating()
+	{
+	    // Fill the code here
+	    
+	    List<String> list=new ArrayList<String>();
+		for(Entry<String, Float> entry:orderMap.entrySet())
+		{	 	  	  	 		     	   	      	 	
+			if(entry.getValue()<=3)
+			{
+				list.add(entry.getKey());
+			}
+			
+		}
+		return list;
+	
+	
+	   // return null;
+	}
+	
+	
+
+	public static void main(String args[])
+	{
+	    // Main method is excluded from evaluation. You are free to write your own code or add lines of code to check the correctness of the functionalities
+	    
+	    FoodOrderMain order=new FoodOrderMain();
+		List<String> list1=new ArrayList<String>();
+		Map<String, Float> map=new HashMap<String,Float>();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter number of records to be added:");
+		int n=sc.nextInt();
+		System.out.println("Enter the order records (Order id : rating):");
+		String [] orderDetails = new String[n];
+		for(int i=0;i<n;i++) {
+			orderDetails[i] = sc.next();
+		}
+		
+		for(int i=0;i<orderDetails.length;i++) {
+			String[] a = orderDetails[i].split(":");
+			
+			map.put(a[0], Float.parseFloat(a[1]));
+			
+			order.setOrderMap(map);
+		}
+		System.out.println("Enter the order id to be searched");
+		String search=sc.next();
+		float rating=order.findRatingOfGivenOrderId(search);
+		if(rating==-1)
+		{
+			System.out.println(search+" is an invalid order id");
+		}
+		else
+		{
+			System.out.println("Customer satisfaction rating of order id "+search+" is "+rating);
+		}
+		list1=order.findOrderIdsWithLowRating();
+		if(list1.size()>=1) 
+		{
+			System.out.println("Order ids of the orders with low rating :"); 
+			for(String s:list1)
+			{
+				System.out.println(s);
+			}
+		}
+		else
+			System.out.println("No order has a low rating");
+	}
+	
+}
