@@ -1,0 +1,120 @@
+
+
+public class Child {
+    private String name;
+    private char gender;
+    private int age;
+    private double ticketCharge;
+    
+    public Child() {
+        super();
+        
+    }
+
+    public Child(String name, char gender, int age, double ticketCharge) {
+        super();
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.ticketCharge = ticketCharge;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getTicketCharge() {
+        return ticketCharge;
+    }
+
+    public void setTicketCharge(double ticketCharge) {
+        this.ticketCharge = ticketCharge;
+    }
+    
+    
+
+    public double calculateTicketCharge() {
+        //fill code here
+// 			return -1;
+        
+        double amount=0;
+        if(gender=='F' || gender=='M')
+        {
+        if(age>=5 && age<=10)
+        amount=ticketCharge-ticketCharge*45/100;
+        else if(age>=11 && age<=13)
+        amount=ticketCharge-ticketCharge*55/100;
+        else if(age>=14 && age<=17)
+        amount=ticketCharge-ticketCharge*65/100;
+        }
+        return amount;
+}
+}
+
+
+
+
+
+package Qualifier.Oops.Exotic_Museum;
+
+import java.util.Scanner;
+public class UserInterface {
+	public static Child extractDetails(String childDetails)
+	{
+		
+		//fill code here
+// 		return null;
+        
+        String[] arr=childDetails.split(":", 4);
+	    Child cus=new Child();
+	    cus.setName(arr[0]);
+	    cus.setGender(arr[1].charAt(0));
+	    cus.setAge(Integer.parseInt(arr[2]));
+	    cus.setTicketCharge(Double.parseDouble(arr[3]));
+		return cus;
+	}
+	
+public static void main(String args[]) {
+	Scanner sc=new Scanner(System.in);
+	//fill code here
+	System.out.println("Enter the child details");
+	String details=sc.nextLine();
+	Child cd=new Child() ;
+    cd=extractDetails(details);
+    double amt=cd.calculateTicketCharge();
+    if(amt>0)
+    {
+        System.out.println("Child Details");
+        System.out.println("Name : "+cd.getName());
+        System.out.println("Gender : "+cd.getGender());
+        System.out.println("Age : "+cd.getAge());
+        System.out.printf("Ticket Charge : "+amt);
+    }
+    else
+    {
+        System.out.println("Invalid child details");
+    }
+}
+}
+
+
